@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+import "bootstrap/scss/bootstrap.css";
+import 'normalize.css';
 
 ReactDOM.render(
   <React.StrictMode>
