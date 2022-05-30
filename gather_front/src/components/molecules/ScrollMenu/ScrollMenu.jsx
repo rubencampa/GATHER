@@ -1,27 +1,38 @@
 import './scrollMenu.css'
 import useDraggableScroll from 'use-draggable-scroll';
-import { useRef } from 'react';
+import { useEffect } from 'react';
+import { useRef, useState } from 'react';
+import { getTemas } from '../../services/PostsService';
 
-const ScrollMenu = () =>{
+const ScrollMenu = ({handleTemas, handleReiniciarTemas}) =>{
     const ref = useRef(null);
     const { onMouseDown } = useDraggableScroll(ref,{direction: 'horizontal'});
+    const [temasTotales,setTemasTotales] = useState()
   
-    function temaPulsado (e){
-        console.log(e.target)
+    
+    //Traer la peticion de temas por peticion aqui que facilita los filtros
+    const enviarTema = (tema) =>{
+      handleTemas(tema);
     }
+
+
+    useEffect(() => {
+      getTemas().then((res) => {
+        setTemasTotales(res);
+      });
+  
+    }, [])
+    
+    
     return (
       <div ref={ref} onMouseDown={onMouseDown} className="scroll-menu">
-          {/* //Poner posible pipeline para nombres largos */}
-        <div className="tema item1" onClick={temaPulsado}>Políica</div>
-        <div className="tema item2" onClick={temaPulsado}>Videojuegos</div>
-        <div className="tema item3" onClick={temaPulsado}>Cultura Internet</div>
-        <div className="tema item4" onClick={temaPulsado}>Tema 4</div>
-        <div className="tema item5" onClick={temaPulsado}>Tema 5</div>
-        <div className="tema item6" onClick={temaPulsado}>Tema 6</div>
-        <div className="tema item7" onClick={temaPulsado}>Tema 7</div>
-        <div className="tema item8" onClick={temaPulsado}>Tema 8</div>
-        <div className="tema item9" onClick={temaPulsado}>Tema 9</div>
-        <div className="tema item10" onClick={temaPulsado}>Tema 10</div>
+         {/* //Poner posible pipeline para nombres largos */}
+        <div className="tema item" onClick={() => handleReiniciarTemas()}>Todo</div>
+         {temasTotales ?
+          temasTotales.map((tema) => (
+            <div key={`${tema.id}`} className={`tema item${tema.id}`} onClick={() => enviarTema(tema)}>{tema.nombre}</div>
+          ))
+          :null}
       </div>
     );
 }

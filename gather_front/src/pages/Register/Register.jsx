@@ -5,21 +5,26 @@ import "./register.css";
 // import style from "../../components/atoms/Button/buttonsStyles";
 import Logo from "../../resources/img/logo_gather.png";
 import { useState } from "react";
-import ModalLoginReg from "../../components/molecules/Modal/ModalLoginReg";
+import ModalLogin from "../../components/molecules/Modal/ModalLogin";
+import ModalReg from "../../components/molecules/Modal/ModalReg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLinkedinIn } from "@fortawesome/free-brands-svg-icons"
 import { faTwitter } from "@fortawesome/free-brands-svg-icons"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
 
 const Register = () => {
-  const [mostrarForm, setMostrarForm] = useState(false);
-
+  const [mostrarFormLogin, setMostrarFormLogin] = useState(false);
+  const [mostrarFormReg, setMostrarFormReg] = useState(false);
   // let navigate = useNavigate();
-  const showForm = () => {
-    setMostrarForm(!mostrarForm);
-    console.log("mostrar modal" + mostrarForm);
-  };
+  const showFormLogin = () => {
+    setMostrarFormLogin(!mostrarFormLogin);
+   
+  }; 
 
+  const showFormReg = () => {
+    setMostrarFormReg(!mostrarFormReg);
+    
+  };
   return (
     <>
       <div className="container-register d-flex flex-column">
@@ -45,8 +50,13 @@ const Register = () => {
               <h1 className="name text-white">Gather</h1>
             </div>
           </div>
-          <div className="button-form col-md-12 d-flex justify-content-center mt-5">
-          <div className="box" onClick={showForm}>JOIN IN</div>
+          <div className="btn-acciones row justify-content-center align-items-center">
+          <div className="button-form col-md-3 d-flex mt-5">
+            <div className="box mx-auto fs-2" onClick={showFormReg}>REGISTER</div>
+          </div>
+          <div className="button-form col-md-3 d-flex mt-5">
+            <div className="box mx-auto" onClick={showFormLogin}>JOIN IN</div>
+          </div>
           </div>
           <div className="div-sup col-12 d-flex justify-content-between">
             <ul className="wrapper align-items-center redes">
@@ -72,10 +82,17 @@ const Register = () => {
           </div>
         </div>
       </div>
-      {mostrarForm ? (
-        <ModalLoginReg
-          show={mostrarForm}
-          onHide={showForm}
+      {mostrarFormLogin ? (
+        <ModalLogin
+          show={mostrarFormLogin}
+          onHide={showFormLogin}
+        />
+      ) : null}
+
+      {mostrarFormReg ? (
+        <ModalReg
+          show={mostrarFormReg}
+          onHide={showFormReg}
         />
       ) : null}
     </>

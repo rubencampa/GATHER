@@ -40,7 +40,7 @@ const Footer = () => {
           </div>
           <div className="correo col-md-4">
             <span>Direccion de correo:</span>
-            <p>ruben.campanario.dieguez@gmail.com</p>
+            <p><a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJvrcSTtgJJCnqXNWRSbsLnpJXXRGHMgnhFzlFqxnmDJLTsrQBxRWQvczWsmXwWWLGMNDVV">ruben.campanario.dieguez@gmail.com</a></p>
           </div>
         </div>
       </footer>
